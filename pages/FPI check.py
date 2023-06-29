@@ -317,7 +317,7 @@ def geo_mandal(base_retro,vill_shape_file,vill_loc):
     ac_no = vill_loc['AC'].unique()[0]
     base_retro, vill_shp, vill_loc, df1 = get_data(
         base_retro, vill_shape_file, vill_loc, ac_no)
-    fig,ax = plt.subplots(1,1,figsize=(16,8))
+    fig,ax = plt.subplots(1,1,figsize=(12,8))
     cmap = plt.cm.Set1
     
     #Plotting the mandal and color each category via cmap
