@@ -303,7 +303,7 @@ def geo_mandal(base_retro,vill_shape_file,vill_loc):
     ac_no = vill_loc['AC'].unique()[0]
     base_retro, vill_shp, vill_loc, df1 = get_data(
         base_retro, vill_shape_file, vill_loc, ac_no)
-    fig,ax = plt.subplots(1,1,figsize=(12,12))
+    fig,ax = plt.subplots(1,1,figsize=(8,12))
     cmap = plt.cm.Set1
     
     #Plotting the mandal and color each category via cmap
@@ -317,8 +317,8 @@ def geo_mandal(base_retro,vill_shape_file,vill_loc):
     lines = [Line2D([0], [0], marker="s", markersize=10, markeredgecolor='black', linewidth=0, color=c) for c in
              legend_colors]
 
-    plt.legend(lines, prop={'size': 8}, framealpha=0, handletextpad=0.1,
-               bbox_to_anchor=(1, 0), loc="lower left", labelspacing=1.0)
+    plt.legend(lines, legend_labels, prop={'size': 6}, framealpha=0, handletextpad=0.1,
+               bbox_to_anchor=(0.5, 0.5,0.5,0.5), loc="lower left", labelspacing=1.0)
 
     # Adding level
     df1['rep'] = df1['geometry'].representative_point()
@@ -334,7 +334,7 @@ def geo_mandal(base_retro,vill_shape_file,vill_loc):
                            za_points_1["VILL_ID"]):  # +za_points_2.geometry.x)/2,+za_points_2.geometry.y)/2
 
         fp = matplotlib.font_manager.FontProperties(
-            fname=r"fonts/FiraSans-ExtraBold.ttf")
+            fname=r"fonts/FiraSans-Bold.ttf")
 
         texts.append(plt.text(x, y, label, fontproperties=fp, horizontalalignment='center',
                               fontsize=2, 
