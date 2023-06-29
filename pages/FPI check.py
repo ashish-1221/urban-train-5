@@ -16,7 +16,7 @@ import folium
 from folium.plugins import Search
 from folium.plugins import *
 import branca.colormap
-from st_aggrid import AgGrid,GridUpdateMode,JsCode,DataReturnMode
+from st_aggrid import AgGrid,GridUpdateMode,JsCode,DataReturnMode,ColumnsAutoSizeMode
 from st_aggrid.grid_options_builder import GridOptionsBuilder
 from gdrive import *
 import matplotlib
@@ -24,6 +24,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from collections import OrderedDict
 import io
+import requests
 
 ## Setting the main page conditions
 st.set_page_config(
@@ -38,7 +39,21 @@ st.set_page_config(
     }
 )
 
+## setting the emoji functions
+@st.cache(ttl=60*60*12, allow_output_mutation=True)
+def fetch_emojis():
+    resp = requests.get(
+        'https://raw.githubusercontent.com/omnidan/node-emoji/master/lib/emoji.json')
+    json = resp.json()
+    codes, emojis = zip(*json.items())
+    return pd.DataFrame({
+        'Emojis': emojis,
+        'Shortcodes': [f':{code}:' for code in codes],
+    })
 
+emojis = fetch_emojis()
+
+st.table(emojis)
 
 ## Creating the session state
 if "visibility" not in st.session_state:
@@ -384,6 +399,7 @@ def aggrid_intializer(df):
         width = '100%',
         fit_columns_on_grid_load=False,
         reload_data=False,
+        columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS,
         enable_enterprise_modules=True,
         header_checkbox_selection_filtered_only=True,
         use_checkbox=True
