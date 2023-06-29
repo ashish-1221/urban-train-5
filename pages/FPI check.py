@@ -12,7 +12,6 @@ from folium import Map, FeatureGroup, Marker, LayerControl
 import warnings
 warnings.filterwarnings('ignore')
 import shapefile
-import folium
 from folium.plugins import Search
 from folium.plugins import *
 import branca.colormap
@@ -39,6 +38,21 @@ st.set_page_config(
     }
 )
 
+## setting the emoji functions
+@st.cache(ttl=60*60*12, allow_output_mutation=True)
+def fetch_emojis():
+    resp = requests.get(
+        'https://raw.githubusercontent.com/omnidan/node-emoji/master/lib/emoji.json')
+    json = resp.json()
+    codes, emojis = zip(*json.items())
+    return pd.DataFrame({
+        'Emojis': emojis,
+        'Shortcodes': [f':{code}:' for code in codes],
+    })
+
+# emojis = fetch_emojis()
+
+# st.dataframe(emojis)
 
 ## Creating the session state
 if "visibility" not in st.session_state:
@@ -303,13 +317,13 @@ def geo_mandal(base_retro,vill_shape_file,vill_loc):
     ac_no = vill_loc['AC'].unique()[0]
     base_retro, vill_shp, vill_loc, df1 = get_data(
         base_retro, vill_shape_file, vill_loc, ac_no)
-    fig,ax = plt.subplots(1,1,figsize=(8,12))
+    fig,ax = plt.subplots(1,1,figsize=(16,8))
     cmap = plt.cm.Set1
     
     #Plotting the mandal and color each category via cmap
     df1 = df1.dissolve('Final_Mandal', as_index=False)
     df1.plot(ax=ax, cmap=cmap, linewidth=1.2, edgecolor='black')
-    df1.plot(ax=ax, color='None', linewidth=0.1, edgecolor='grey')
+    (df1.plot(ax=ax, color='None', linewidth=0.1, edgecolor='grey'))
 
     # Adding Legened
     legend_labels = df1['Final_Mandal'].to_list()
@@ -317,8 +331,8 @@ def geo_mandal(base_retro,vill_shape_file,vill_loc):
     lines = [Line2D([0], [0], marker="s", markersize=10, markeredgecolor='black', linewidth=0, color=c) for c in
              legend_colors]
 
-    plt.legend(lines, legend_labels, prop={'size': 6}, framealpha=0, handletextpad=0.1,
-               bbox_to_anchor=(0.5, 0.5,0.5,0.5), loc="lower left", labelspacing=1.0)
+    plt.legend(lines, legend_labels, prop={'size': 12}, framealpha=0, handletextpad=0.1,
+               bbox_to_anchor=(1, 0), loc="lower left", labelspacing=1.0)
 
     # Adding level
     df1['rep'] = df1['geometry'].representative_point()
@@ -329,21 +343,21 @@ def geo_mandal(base_retro,vill_shape_file,vill_loc):
     za_points_2.set_geometry('centroid', inplace=True)
     
     texts = []
-    for x, y, label in zip(za_points_1.geometry.x,
-                           za_points_1.geometry.y,
-                           za_points_1["VILL_ID"]):  # +za_points_2.geometry.x)/2,+za_points_2.geometry.y)/2
+    # for x, y, label in zip(za_points_1.geometry.x,
+    #                        za_points_1.geometry.y,
+    #                        za_points_1["VILL_ID"]):  # +za_points_2.geometry.x)/2,+za_points_2.geometry.y)/2
 
-        fp = matplotlib.font_manager.FontProperties(
-            fname=r"fonts/FiraSans-Bold.ttf")
+    #     fp = matplotlib.font_manager.FontProperties(
+    #         fname=r"fonts/FiraSans-ExtraBold.ttf")
 
-        texts.append(plt.text(x, y, label, fontproperties=fp, horizontalalignment='center',
-                              fontsize=2, 
-                              path_effects=[pe.withStroke(linewidth=0.6,
-                                                          foreground="white")]))
+    #     texts.append(plt.text(x, y, label, fontproperties=fp, horizontalalignment='center',
+    #                           fontsize=4, 
+    #                           path_effects=[pe.withStroke(linewidth=0.6,
+    #                                                       foreground="white")]))
 
     ac = df1['AC_x'].unique()[0]
     ac_name = df1['AC_Name_x'].unique()[0]
-    plt.title(f'AC -{ac} ({ac_name}) || Mandal Boundary')
+    plt.title(label=f'AC -{ac} ({ac_name}) || Mandal Boundary',fontsize=16,fontweight=20)
     ax.axis('off')
     #st.pyplot(fig)
     
