@@ -51,9 +51,9 @@ def fetch_emojis():
         'Shortcodes': [f':{code}:' for code in codes],
     })
 
-emojis = fetch_emojis()
+# emojis = fetch_emojis()
 
-st.dataframe(emojis)
+# st.dataframe(emojis)
 
 ## Creating the session state
 if "visibility" not in st.session_state:
@@ -63,12 +63,12 @@ if "visibility" not in st.session_state:
 
 
 
-st.info("Currently for MP State, can be pushed out to all states")
-st.warning("Enter the Mapping Sheet Id ==> 1bqcgyBNVJ5jOZnrJPxqQNnWsLYTJIlyCm6yKfTTkaTg")
-st.info("Filter out the AC, Village, Locality in the Table")
-st.info("Colour Scales Represent Mandals")
-st.info("Red Boundary Represents Locality")
-st.info("Blue dashed Boundary represents Village Shapes")
+st.info("Currently for MP State, can be pushed out to all states",icon=":one:")
+st.warning("Enter the Mapping Sheet Id ==> 1bqcgyBNVJ5jOZnrJPxqQNnWsLYTJIlyCm6yKfTTkaTg",icon=":two:")
+st.info("Filter out the AC, Village, Locality in the Table",icon=":three:")
+st.info("Colour Scales Represent Mandals",icon=":four:")
+st.info("Red Boundary Represents Locality",icon=":five:")
+st.info("Blue dashed Boundary represents Village Shapes",icon=":six:")
 
 
 ## UDF for reading the village Shape file of the selected State Name
