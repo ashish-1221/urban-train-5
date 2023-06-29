@@ -63,8 +63,8 @@ def return_v_gdf(st_name):
     vill_shape_file = vill_shape_file[['OID_','AC_POST','AC_NAME_PO','PC_NAME_PO','NAME11',
                                                'SUB_DIST11','DIST_11','geometry']]
     print("reading the AC Shape File")
-    ac_shape_file = gd.read_file(
-        "data\shapefiles\SHP_MadhyaPradesh\AC_POST.shp")
+    ac_file_path = (os.path.join(os.getcwd(),"data","shapefiles","SHP_MadhyaPradesh","AC_POST.shp"))
+    ac_shape_file = gd.read_file(ac_file_path)
     print("Reading the State Shape file")
     st_shape_file = ac_shape_file.dissolve(by="STATE_UT").reset_index(drop=False)
     return vill_shape_file,ac_shape_file,st_shape_file
