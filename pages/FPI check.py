@@ -53,7 +53,7 @@ def fetch_emojis():
 
 emojis = fetch_emojis()
 
-st.table(emojis)
+st.dataframe(emojis)
 
 ## Creating the session state
 if "visibility" not in st.session_state:
