@@ -57,9 +57,9 @@ st.info("Blue dashed Boundary represents Village Shapes")
 @st.cache_data(persist=True)
 def return_v_gdf(st_name):
     print("reading the village Shape File")
-    print(os.getcwd())
-    vill_shape_file = gd.read_file(
-        r"data\shapefiles\SHP_MadhyaPradesh\VILLAGE_TOWN.shp")
+    print("\n")
+    village_file_path = (os.path.join(os.getcwd(),"data","shapefiles","SHP_MadhyaPradesh","VILLAGE_TOWN.shp"))
+    vill_shape_file = gd.read_file(village_file_path)
     vill_shape_file = vill_shape_file[['OID_','AC_POST','AC_NAME_PO','PC_NAME_PO','NAME11',
                                                'SUB_DIST11','DIST_11','geometry']]
     print("reading the AC Shape File")
