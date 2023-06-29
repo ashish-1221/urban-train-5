@@ -47,7 +47,7 @@ if "visibility" not in st.session_state:
 
 
 st.info("Currently for MP State, can be pushed out to all states")
-st.info("Enter the Gsheet Id For MP_Locality_Village_Mandal Mapping File in this case ==> 1bqcgyBNVJ5jOZnrJPxqQNnWsLYTJIlyCm6yKfTTkaTg")
+st.warning("Enter the Mapping Sheet Id ==> 1bqcgyBNVJ5jOZnrJPxqQNnWsLYTJIlyCm6yKfTTkaTg")
 st.info("Filter out the AC, Village, Locality in the Table")
 st.info("Colour Scales Represent Mandals")
 st.info("Red Boundary Represents Locality")
