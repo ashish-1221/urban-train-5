@@ -394,15 +394,21 @@ def aggrid_intializer(df):
 with st.container():
         
         # # Reading the Data for the required files
-        c1,c2,c3 = st.columns(3)
+        c1,c2,c3,c4 = st.columns(4)
         with c1:
             st.file_uploader(label="Base Retro Data")
         with c2:
             st.file_uploader(label="Shape Files",accept_multiple_files=True)
         with c3:
             map_sheet_id = str(c3.text_input("Mapping Sheet Id"))
+        with c4:
+            el_year = st.selectbox('Election Year',(2018,2019))    
         vill_shape_file,ac_shape_file,st_shape_file = return_v_gdf("Madhya Pradesh")
-        base_retro = pd.read_csv(r"data\baseretro\2018_base_segmentation_MP.csv")
+        if el_year == 2018:
+            base_path = os.path.join(os.getcwd(),"data","baseretro","2018_base_segmentation_MP.csv")
+        else:
+            base_path = os.path.join(os.getcwd(),"data","baseretro","2019_base_segmentation_MP.csv")
+        base_retro = pd.read_csv(base_path)
         st.session_state.vill_loc = get_dataframe(map_sheet_id)
         base_retro, vill_shape_file, st.session_state.vill_loc = col_standardize(base_retro, vill_shape_file,st.session_state.vill_loc)
         ## multiple tabs reflecting diffrent types of maps
