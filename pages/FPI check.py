@@ -46,13 +46,16 @@ if "visibility" not in st.session_state:
     st.session_state.disabled = False       
 
 
+
+
 st.info("Currently for MP State, can be pushed out to all states")
-st.warning("Enter the Mapping Sheet Id ==> 1bqcgyBNVJ5jOZnrJPxqQNnWsLYTJIlyCm6yKfTTkaTg",icon=":a:")
+st.warning("Enter the Mapping Sheet Id ==> 1bqcgyBNVJ5jOZnrJPxqQNnWsLYTJIlyCm6yKfTTkaTg")
 st.info("Filter out the AC, Village, Locality in the Table")
 st.info("Colour Scales Represent Mandals")
 st.info("Red Boundary Represents Locality")
 st.info("Blue dashed Boundary represents Village Shapes")
-    
+
+
 ## UDF for reading the village Shape file of the selected State Name
 @st.cache_data(persist=True)
 def return_v_gdf(st_name):
