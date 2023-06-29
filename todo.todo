@@ -1,0 +1,16 @@
+Project:
+    Census Maps Automation
+    
+Tasks:
+    ☐ Reading Shape Files Faster @high
+    ☐ Deploy the App @low 
+    ☐ Structuring of the EDM-DB Folder @high 
+        ☐ Planning how to structure it
+        ☐ Planning the folder path for each workstream 
+    ☐ Standardization of the columns of gsheets across all formats. @critical
+    ☐ Make Sure all shape files (AC,V_Shape) are present in a single folder in gdrive
+    ☐ Integrating Modifiable gsheets through streamlit @critical @today 
+    ☐ Integrating Vote Share Maps @critical @today 
+
+Done:
+    ✔ Creating Mandal Maps @critical @done (3/24/2023, 4:55:21 AM)

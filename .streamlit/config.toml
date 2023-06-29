@@ -1,0 +1,5 @@
+[client]
+caching = true 
+
+[server]
+maxMessageSize = 300
