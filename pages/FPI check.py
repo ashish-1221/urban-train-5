@@ -309,7 +309,7 @@ def geo_mandal(base_retro,vill_shape_file,vill_loc):
     #Plotting the mandal and color each category via cmap
     df1 = df1.dissolve('Final_Mandal', as_index=False)
     df1.plot(ax=ax, cmap=cmap, linewidth=1.2, edgecolor='black')
-    #(df1.plot(ax=ax, color='None', linewidth=0.1, edgecolor='grey'))
+    df1.plot(ax=ax, color='None', linewidth=0.1, edgecolor='grey')
 
     # Adding Legened
     legend_labels = df1['Final_Mandal'].to_list()
@@ -317,7 +317,7 @@ def geo_mandal(base_retro,vill_shape_file,vill_loc):
     lines = [Line2D([0], [0], marker="s", markersize=10, markeredgecolor='black', linewidth=0, color=c) for c in
              legend_colors]
 
-    plt.legend(lines, prop={'size': 6}, framealpha=0, handletextpad=0.1,
+    plt.legend(lines, prop={'size': 8}, framealpha=0, handletextpad=0.1,
                bbox_to_anchor=(1, 0), loc="lower left", labelspacing=1.0)
 
     # Adding level
